@@ -1,9 +1,10 @@
-import prisma from "../libs/prismaClient";
+import { injectable } from "inversify";
 import { Product } from "../entities/Product";
 import { IProductRepository } from "../interfaces/repository/IProductRepository";
+import prisma from "../libs/prismaClient";
 
+@injectable()
 export class ProductRepository implements IProductRepository {
-
 
     async create(data: Product): Promise<Product> {
         const product = await prisma.product.create({

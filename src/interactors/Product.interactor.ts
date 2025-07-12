@@ -1,11 +1,17 @@
+import { inject, injectable } from "inversify";
 import { IProductInteractor } from "../interfaces/IProductInteractor";
 import { IProductRepository } from "../interfaces/repository/IProductRepository";
+import { INTERFACE_TYPE } from "../utils";
 
+@injectable()
 export class ProductInteractor implements IProductInteractor{
 
     private repository: IProductRepository;
 
-    constructor(repository: IProductRepository) {
+    constructor(
+        @inject(INTERFACE_TYPE.ProductRepository) 
+        repository: IProductRepository
+    ) {
         this.repository = repository
     }
 

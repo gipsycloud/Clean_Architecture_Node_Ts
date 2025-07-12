@@ -1,5 +1,6 @@
+import "reflect-metadata"
 import express from 'express'
-import router from './router';
+import router from './router'
 
 const PORT = process.env.PORT || 5000;
 
