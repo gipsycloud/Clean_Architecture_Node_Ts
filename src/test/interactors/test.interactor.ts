@@ -16,16 +16,16 @@ export class TestInteractor implements ITestInterface {
         return this.repository.create(input)
     }
     getAllTests(limit: number, offset: number) {
-        throw new Error("Method not implemented.");
+        return this.repository.getTests()
     }
     getTest(id: number) {
-        throw new Error("Method not implemented.");
+        return this.repository.getTest(id)
     }
     updateTest(id: number, input: any) {
-        throw new Error("Method not implemented.");
+        return this.repository.update(id,input)
     }
     deleteTest(id: number) {
-        throw new Error("Method not implemented.");
+        return this.repository.delete(id)
     }
 
 }

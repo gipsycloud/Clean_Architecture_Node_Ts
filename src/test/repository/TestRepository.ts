@@ -4,8 +4,8 @@ import { ITestRepository } from "../interfaces/ITestRepository";
 
 
 export class TestRepository implements ITestRepository {
-    create(data: Test): Promise<Test> {
-        const user = prisma.test.create({
+    async create(data: Test): Promise<Test> {
+        const user =await prisma.test.create({
             data: {
                 name: data.name,
                 description: data.description
@@ -14,17 +14,31 @@ export class TestRepository implements ITestRepository {
 
         return user
     }
-    getTests(limit: number, offset: number): Promise<Test> {
-        throw new Error("Method not implemented.");
+    async getTests(): Promise<Test[]> {
+         const tests = await prisma.test.findMany()
+         return tests;
     }
-    getTest(id: number): Promise<Test> {
-        throw new Error("Method not implemented.");
+    async getTest(id: number): Promise<Test> {
+        const test = await prisma.test.findUnique({
+            where: {id}
+        })
+
+        return test as Test
     }
-    update(id: number, data: Test): Promise<Test> {
-        throw new Error("Method not implemented.");
+    async update(id: number, data: Test): Promise<Test> {
+        const test = await prisma.test.update({
+            where: {id},
+            data: data
+        })
+
+        return test
     }
-    delete(id: number): Promise<Test> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<Test> {
+        const test = await prisma.test.delete({
+            where:{id}
+        })
+
+        return test
     }
 
 }
