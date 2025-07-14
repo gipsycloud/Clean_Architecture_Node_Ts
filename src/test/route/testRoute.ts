@@ -1,13 +1,11 @@
 import { Router } from "express";
+import container from "../config/container";
+import { INTERFACE_TYPE } from "../utils";
 import { TestController } from "../controller/TestController";
-import { TestInteractor } from "../interactors/test.interactor";
-import { TestRepository } from "../repository/TestRepository";
-
-const repository = new TestRepository()
-const interactor = new TestInteractor(repository)
-const controller = new TestController(interactor)
 
 const testRoute = Router()
+
+const controller = container.get<TestController>(INTERFACE_TYPE.TestController)
 
 testRoute.post("/test", controller.onCreate.bind(controller))
 

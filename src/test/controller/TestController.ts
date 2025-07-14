@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { ITestInterface } from "../interfaces/ITestInterface";
+import { inject, injectable } from "inversify";
+import { INTERFACE_TYPE } from "../utils";
 
 
+@injectable()
 export class TestController {
 
     constructor (
-        private interactor: ITestInterface
+       @inject(INTERFACE_TYPE.TestInteractor) private interactor: ITestInterface
     ) {
         this.interactor = interactor
     }

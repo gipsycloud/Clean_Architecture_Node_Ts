@@ -1,10 +1,13 @@
+import { inject, injectable } from "inversify";
 import { ITestInterface } from "../interfaces/ITestInterface";
 import { ITestRepository } from "../interfaces/ITestRepository";
+import { INTERFACE_TYPE } from "../utils";
 
+@injectable()
 export class TestInteractor implements ITestInterface {
 
     constructor(
-       private repository: ITestRepository 
+      @inject(INTERFACE_TYPE.TestRepository) private repository: ITestRepository 
     ) {
         this.repository = repository
     }
