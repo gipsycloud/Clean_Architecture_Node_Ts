@@ -1,11 +1,21 @@
+import { PrismaClient } from "@prisma/client";
 import prisma from "../../libs/prismaClient";
 import { Test } from "../entities/test.entitie";
 import { ITestRepository } from "../interfaces/ITestRepository";
+import { inject, injectable } from "inversify";
+import { INTERFACE_TYPE } from "../utils";
 
-
+@injectable()
 export class TestRepository implements ITestRepository {
+
+    constructor (
+       @inject(INTERFACE_TYPE.PrismaClient) private prisma: PrismaClient,
+    ) {
+        this.prisma = prisma
+    }
+
     async create(data: Test): Promise<Test> {
-        const user =await prisma.test.create({
+        const user =await this.prisma.test.create({
             data: {
                 name: data.name,
                 description: data.description

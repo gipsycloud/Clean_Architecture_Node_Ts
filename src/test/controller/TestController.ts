@@ -12,7 +12,7 @@ export class TestController {
     ) {
         this.interactor = interactor
     }
-    async onCreate(req: Request, res: Response, next: NextFunction) {
+    onCreate = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const data = req.body
 
@@ -23,7 +23,7 @@ export class TestController {
         }
     }
 
-    async getAllTest(req: Request, res: Response, next: NextFunction) {
+    getAllTest = async (req: Request, res: Response, next: NextFunction) => {
         try {
            const offset = parseInt(`${req.query.offset}`) || 0;
             const limit = parseInt(`${req.query.limit}`) || 10;
