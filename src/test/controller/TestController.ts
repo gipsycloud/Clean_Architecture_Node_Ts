@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ITestInterface } from "../interfaces/ITestInterface";
 import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../utils";
+import { catchAsync } from "../utils/catchAsync";
 
 
 @injectable()
@@ -28,7 +29,7 @@ export class TestController {
            const offset = parseInt(`${req.query.offset}`) || 0;
             const limit = parseInt(`${req.query.limit}`) || 10;
 
-            const result = await this.interactor.getAllTests(offset, limit)
+            const result = await this.interactor.getAllTests()
             
             res.status(200).json(result)
         } catch (error) {
@@ -36,18 +37,14 @@ export class TestController {
         }
     }
 
-    async getTest(req: Request, res: Response, next: NextFunction) {
-        try {
+     getTest = catchAsync ( async (req: Request, res: Response, next: NextFunction) => {
             const id = parseInt(req.params.id)
             const test = await this.interactor.getTest(id)
 
             res.status(200).json(test)
-        } catch (error) {
-            next(error)
-        }
-    }
+    })
 
-    async updateTest(req: Request, res: Response, next: NextFunction) {
+     updateTest = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = parseInt(req.params.id)
             const data = req.body
@@ -59,7 +56,7 @@ export class TestController {
         }
     }
 
-    async deleteTest (req: Request, res: Response, next: NextFunction) {
+     deleteTest = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = parseInt(req.params.id)
 

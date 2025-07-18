@@ -4,5 +4,6 @@ export class User {
         public readonly email: string,
         public readonly phone: string,
         public readonly password: string,
+        public readonly id?: number
     ) {}
 }

@@ -4,6 +4,7 @@ import { Test } from "../entities/test.entitie";
 import { ITestRepository } from "../interfaces/ITestRepository";
 import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../utils";
+import { AppError } from "../errors/HttpError";
 
 @injectable()
 export class TestRepository implements ITestRepository {
@@ -29,14 +30,18 @@ export class TestRepository implements ITestRepository {
          return tests;
     }
     async getTest(id: number): Promise<Test> {
-        const test = await prisma.test.findUnique({
+        const test = await this.prisma.test.findUnique({
             where: {id}
         })
+
+        if(!test) {
+           throw new AppError(404, "Test not found");
+        }
 
         return test as Test
     }
     async update(id: number, data: Test): Promise<Test> {
-        const test = await prisma.test.update({
+        const test = await this.prisma.test.update({
             where: {id},
             data: data
         })
@@ -44,7 +49,7 @@ export class TestRepository implements ITestRepository {
         return test
     }
     async delete(id: number): Promise<Test> {
-        const test = await prisma.test.delete({
+        const test = await this.prisma.test.delete({
             where:{id}
         })
 

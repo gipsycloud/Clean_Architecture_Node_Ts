@@ -15,7 +15,7 @@ export class TestInteractor implements ITestInterface {
     async createTest(input: any) {
         return this.repository.create(input)
     }
-    getAllTests(limit: number, offset: number) {
+    getAllTests() {
         return this.repository.getTests()
     }
     getTest(id: number) {
