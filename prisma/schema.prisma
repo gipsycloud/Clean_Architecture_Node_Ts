@@ -40,6 +40,8 @@ model Sale {
   notes      String?  @db.Text
   mobile     Mobile   @relation(fields: [mobileId], references: [id])
   customer   Customer @relation(fields: [customerId], references: [id])
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
 }
 
 model Category {
@@ -65,6 +67,8 @@ model Mobile {
   status          Status      @default(Available)
   addedAt         DateTime    @default(now()) @map("added_at")
   category        Category    @relation(fields: [categoryId], references: [id])
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @default(now()) @map("updated_at")
   sales           Sale[]
   inventory       Inventory[]
 }
@@ -76,6 +80,8 @@ model Inventory {
   quantity   Int
   actionDate DateTime @default(now()) @map("action_date")
   notes      String?  @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
   mobile     Mobile   @relation(fields: [mobileId], references: [id])
 }
 
