@@ -7,7 +7,7 @@ import productRoute from "./product/route/route";
 import { errorHandler } from "./test/middleware/AppError";
 import customerRoute from "./shop/customer/router/route";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 const app = express();
 app.use(express.json());
