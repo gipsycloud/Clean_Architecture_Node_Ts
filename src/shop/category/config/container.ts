@@ -11,3 +11,5 @@ const container = new Container()
 container.bind<ICategoryRepository>(INTERFACE_TYPE.CategoryRepository).to(CategoryRepository)
 container.bind<ICategoryInterface>(INTERFACE_TYPE.CategoryIneractor).to(CategoryIneractor)
 container.bind<CategoryController>(INTERFACE_TYPE.CategoryController).to(CategoryController)
+
+export default container
