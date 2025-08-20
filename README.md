@@ -103,7 +103,7 @@ JWT_SECRET="your-super-secret-key"
 
 -  **You must need to known basic docker (dockerfile, docker-compose and other docker tool, etc...)**
 
--  **you will copy .env.example file to .env**
+-  **Copy the `.env.example` file and rename it to `.env`**
 
 -   **If you run docker for very first time use this command**
     ```bash
