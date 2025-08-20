@@ -101,11 +101,11 @@ JWT_SECRET="your-super-secret-key"
 
 ### Running Application with docker
 
-### You must need to known basic docker (dockerfile, docker-compose and other docker tool, etc...)
+-  **You must need to known basic docker (dockerfile, docker-compose and other docker tool, etc...)**
 
 -  **you will copy .env.example file to .env**
 
--   **If you run docker for very first use this command**
+-   **If you run docker for very first time use this command**
     ```bash
     docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build  
     ```
