@@ -99,7 +99,7 @@ PORT=3000
 JWT_SECRET="your-super-secret-key"
 ```
 
-### Running Application with docker
+## Running Application with docker
 
 -  **You must need to known basic docker (dockerfile, docker-compose and other docker tool, etc...)**
 
