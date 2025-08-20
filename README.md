@@ -83,7 +83,6 @@ Follow these instructions to get the project up and running on your local machin
     # 2. Start the server
     npm run start
     ```
-
 ## ⚙️ Environment Variables
 
 Create a `.env` file in the project root with the following variables:
@@ -99,6 +98,22 @@ PORT=3000
 # Secret key for JWT signing (used in auth)
 JWT_SECRET="your-super-secret-key"
 ```
+
+### Running Application with docker
+
+### You must need to known basic docker (dockerfile, docker-compose and other docker tool, etc...)
+
+-   **If you run docker for very first use this command**
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build  
+    ```
+    The server will start on `http://localhost:6000`
+
+-   **If you run docker for seconde time command**
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+    ```
+
 
 ## 📖 API Endpoints
 
