@@ -7,3 +7,12 @@ To run this project, you will need to add the following environment variables to
 
 `ANOTHER_API_KEY`
 
+-- api --
+
+http://localhost:3000/api/V1/category
+
+`get /`
+`post /create`
+
+
+
