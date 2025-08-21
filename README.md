@@ -105,15 +105,15 @@ JWT_SECRET="your-super-secret-key"
 
 -  **Copy the `.env.example` file and rename it to `.env`**
 
--   **If you run docker for very first time use this command**
+-   **If you run docker for very first time use this command (ps: `-d`  detached mode (background mode))**
     ```bash
-    docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build  
+    docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build  
     ```
     The server will start on `http://localhost:6000`
 
 -   **If you run docker for seconde time command**
     ```bash
-    docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+    docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
     ```
 
 -   **If you want to stop docker use this command**
