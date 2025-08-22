@@ -1,11 +1,13 @@
 import { PrismaClient } from "@prisma/client";
-import { User } from "../entities/auth.entity";
+import { AuthResponse, User } from "../entities/auth.entity";
 import { IAuthRepository } from "../useCase/interface/IAuthRepository";
 import { AppError } from "../../../errors/httpErrors";
 import { HTTP_STATUS } from "../../../configs/httpStatusCodes";
 import bcrypt from "bcrypt";
 import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../utils/appConst";
+import { generateAccessToken, generateRefreshToken, saveRefreshToken } from "../utils/jwt";
+import { RedisClientType } from "redis";
 
 @injectable()
 export class AuthRepository implements IAuthRepository {
@@ -16,8 +18,27 @@ export class AuthRepository implements IAuthRepository {
         this.prisma = prisma;
     }
 
-    login(email: string, password: string): Promise<User> {
-        throw new Error("Method not implemented.");
+    async login(data: User, redis: RedisClientType): Promise<AuthResponse> {
+        const user = await this.prisma.user.findFirst({
+            where: {email: data.email}
+        })
+
+        if(!user) {
+           throw new AppError(HTTP_STATUS.NOT_FOUND, "user not found")
+        }
+
+        const isPasswordValid = bcrypt.compareSync(data.password, user.password)
+
+        if(!isPasswordValid) {
+            throw new AppError(HTTP_STATUS.BAD_REQUEST, "Invalid email or password")
+        }
+
+        const accessToken = generateAccessToken(user.id)
+        const refreshToken = generateRefreshToken(user.id)
+
+        await saveRefreshToken(redis, user.id, refreshToken)
+
+        return {user, accessToken, refreshToken}
     }
     async register(data: User): Promise<User> {
         

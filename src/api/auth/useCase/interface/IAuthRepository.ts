@@ -1,7 +1,8 @@
-import { User } from "../../entities/auth.entity";
+import { RedisClientType } from "redis";
+import { AuthResponse, User } from "../../entities/auth.entity";
 
 export interface IAuthRepository { 
-    login(email: string, password: string): Promise<User>;
+    login(data: User,redis: RedisClientType): Promise<AuthResponse>;
     register(data: User): Promise<User>;
     logout(token: string): Promise<void>;
     refreshToken(token: string): Promise<string>;

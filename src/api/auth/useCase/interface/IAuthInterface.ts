@@ -1,6 +1,7 @@
+import { RedisClientType } from "redis";
 
 export interface IAuthInterface { 
-    login(email: string, password: string): any;
+    login(input: any, redis: RedisClientType): any;
     register(input: any): any;
     logout(token: string): any;
     refreshToken(token: string): any;
