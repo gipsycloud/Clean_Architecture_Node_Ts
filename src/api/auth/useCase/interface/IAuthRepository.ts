@@ -5,7 +5,7 @@ export interface IAuthRepository {
     login(data: User,redis: RedisClientType): Promise<AuthResponse>;
     register(data: User): Promise<User>;
     logout(token: string): Promise<void>;
-    refreshToken(token: string): Promise<string>;
+    refreshToken(refreshToken: string, redis: RedisClientType): Promise<string>;
     findUserByEmail(email: string): Promise<User>;
     findUserById(id: string): Promise<User>;
 }

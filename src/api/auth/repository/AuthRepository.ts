@@ -6,7 +6,7 @@ import { HTTP_STATUS } from "../../../configs/httpStatusCodes";
 import bcrypt from "bcrypt";
 import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../utils/appConst";
-import { generateAccessToken, generateRefreshToken, saveRefreshToken } from "../utils/jwt";
+import { generateAccessToken, generateNewAccessToken, generateRefreshToken, saveRefreshToken } from "../utils/jwt";
 import { RedisClientType } from "redis";
 
 @injectable()
@@ -70,8 +70,9 @@ export class AuthRepository implements IAuthRepository {
     logout(token: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    refreshToken(token: string): Promise<string> {
-        throw new Error("Method not implemented.");
+    async refreshToken(refreshToken: string, redis: RedisClientType): Promise<string> {
+        const newAccessToken = await generateNewAccessToken(redis, refreshToken)
+        return newAccessToken
     }
     findUserByEmail(email: string): Promise<User> {
         throw new Error("Method not implemented.");

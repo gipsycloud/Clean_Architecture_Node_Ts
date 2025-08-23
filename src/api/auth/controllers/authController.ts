@@ -41,4 +41,15 @@ export class AuthController {
             }
         })
     })
+
+    refreshToken = catchAsync(async (req: Request, res: Response) => {
+        const {refreshToken: refreshTokenBody} = req.body
+        console.log("refresh-token endpoint body:", req.body);
+        if(!refreshTokenBody) {
+            return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Refresh token required" });
+        }
+
+         const accessToken = await this.interactor.refreshToken(refreshTokenBody, this.redis);
+        res.json({ accessToken });
+    })
 }

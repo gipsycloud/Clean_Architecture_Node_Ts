@@ -16,3 +16,7 @@ export const loginSchema = object({
   email: string().nonempty("Email is required").email("Not a valid email"),
   password: string().nonempty("Password is required"),
 });
+
+export const token = object({
+  refreshToken: string().nonempty("refresh token is required")
+});
