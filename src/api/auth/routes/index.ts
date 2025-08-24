@@ -14,6 +14,7 @@ const authController = container.get<AuthController>(INTERFACE_TYPE.AuthControll
 authRouter.post("/register", validate(registerSchema), authController.registerUser);
 authRouter.post("/login", validate(loginSchema), authController.loginUser);
 authRouter.post("/refresh-token", validate(token), authController.refreshToken)
+authRouter.post("/logout", authMiddleware, authController.logout)
 
 authRouter.get("/test", authMiddleware, (req: Request, res: Response) => {
     res.json("success")

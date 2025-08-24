@@ -19,8 +19,8 @@ export class AuthInteractor implements IAuthInterface {
     register(input: any) {
         return this.repository.register(input);
     }
-    logout(token: string) {
-        return this.repository.logout(token);
+    logout(refreshToken: string,accessToken: string, redis: RedisClientType) {
+        return this.repository.logout(refreshToken,accessToken, redis);
     }
     refreshToken(refreshToken: string, redis: RedisClientType) {
         return this.repository.refreshToken(refreshToken, redis);

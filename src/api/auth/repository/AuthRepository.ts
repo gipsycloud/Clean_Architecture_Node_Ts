@@ -8,6 +8,7 @@ import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../utils/appConst";
 import { generateAccessToken, generateNewAccessToken, generateRefreshToken, saveRefreshToken } from "../utils/jwt";
 import { RedisClientType } from "redis";
+import jwt from "jsonwebtoken"
 
 @injectable()
 export class AuthRepository implements IAuthRepository {
@@ -67,8 +68,18 @@ export class AuthRepository implements IAuthRepository {
         return safeUser as User;
 
     }
-    logout(token: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async logout(refreshToken: string, accessToken: string, redis: RedisClientType): Promise<void> {
+       const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!) as { userId: number };
+       await redis.del(`refresh:${decoded.userId}`);
+
+       const accessDecoded = jwt.decode(accessToken) as { exp: number };
+      if (accessDecoded?.exp) {
+        const ttl = accessDecoded.exp - Math.floor(Date.now() / 1000);
+        if (ttl > 0) {
+          await redis.setEx(`blacklist:${accessToken}`, ttl, "revoked");
+        }
+      }
+       
     }
     async refreshToken(refreshToken: string, redis: RedisClientType): Promise<string> {
         const newAccessToken = await generateNewAccessToken(redis, refreshToken)

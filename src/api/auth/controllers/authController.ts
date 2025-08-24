@@ -42,14 +42,23 @@ export class AuthController {
         })
     })
 
+    logout = catchAsync(async (req: Request, res: Response) => {
+         const refreshToken = req.body.refreshToken;
+         const accessToken = req.headers.authorization?.split(" ")[1]; 
+         if (!accessToken) {
+            return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Access token required" });
+         }
+        await this.interactor.logout(refreshToken, accessToken, this.redis);
+        res.json({ message: "Logged out successfully" });
+    })
+
     refreshToken = catchAsync(async (req: Request, res: Response) => {
         const {refreshToken: refreshTokenBody} = req.body
-        console.log("refresh-token endpoint body:", req.body);
         if(!refreshTokenBody) {
             return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Refresh token required" });
         }
 
-         const accessToken = await this.interactor.refreshToken(refreshTokenBody, this.redis);
-        res.json({ accessToken });
+        const accessToken = await this.interactor.refreshToken(refreshTokenBody, this.redis);
+        res.status(HTTP_STATUS.OK).json({ accessToken });
     })
-}
+}   
