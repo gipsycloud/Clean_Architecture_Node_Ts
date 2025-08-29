@@ -8,6 +8,6 @@ const customerRoute = Router()
 const controller = container.get<CustomerController>(INTERFACE_TYPE.CustomerController)
 
 customerRoute.post('/create', controller.createCustomer)
-customerRoute.get('/', controller.getAllCustomer)
+customerRoute.get('/customers', controller.getAllCustomer)
 
 export default customerRoute
