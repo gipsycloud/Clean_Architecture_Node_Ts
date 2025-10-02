@@ -141,6 +141,12 @@ The API is accessible under the `/api` prefix (configurable).
 
 -   **`GET /`**: Retrieves a list of all customers.
 -   **`POST /create`**: Creates a new customer.
+    -   **Request Body:**
+        ```json
+        {
+          "first_name": "John",
+          "last_name": "John",
+        } 
 
 ### Authentication API (`/api/auth`)
 
