@@ -5,7 +5,7 @@ export class Sale {
   constructor(
     public readonly mobileId: number,
     public readonly customerId: number,
-    public readonly saleDate: Date,
+    public readonly saleDate: Date | null,
     public readonly salePrice: string,
     public readonly notes: string | null,
     public readonly createdAt: Date,

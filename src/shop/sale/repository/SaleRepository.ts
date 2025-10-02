@@ -33,7 +33,7 @@ export class SaleRepository implements ISaleRepository {
       data: {
         mobileId: data.mobileId,
         customerId: data.customerId,
-        saleDate: data.saleDate,
+        saleDate: data.saleDate || new Date(),
         salePrice: data.salePrice,
         notes: data.notes,
         createdAt: data.createdAt,

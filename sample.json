@@ -1,0 +1,48 @@
+// form shop
+{
+  "mobileId": 1,
+  "customerId": 1,
+  "saleDate": "2023-11-15T10:30:00.000Z",
+  "salePrice": "500000",
+  "notes": "all fine"
+}
+// for mobile
+{
+  "categoryId": 1,
+  "modelName": "MI",
+  "brand": "MI",
+  "condition": "Good",
+  "price": "1000",
+  "storageCapacity": "256",
+  "ram": "6",
+  "color": "black",
+  "description": "good",
+  "imei": "12456",
+  "status": "Available"
+}
+// for customer
+{
+  "customer_name": "first customer",
+  "email": "first@gmail.com",
+  "phone": "123456",
+  "address": "Yangon"
+}
+// for category
+{
+  "category_name": "first category",
+  "description": "first category category",
+  "createdAt": "2025-03-05"
+}
+// for register
+{
+  "name": "first",
+  "email": "first@gmail.com",
+  "phone": "09789456235",
+  "password": "Password",
+  "confirmPassword": "Password"
+}
+// for login
+{
+  "email": "first@gmail.com",
+  "password": "Password"
+}
